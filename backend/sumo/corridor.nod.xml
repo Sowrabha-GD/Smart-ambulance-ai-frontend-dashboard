@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Junction layout mirrors backend/config.py:
+    ROAD_NETWORK  -> J1 is the dispatch junction, HOSPITAL is the destination
+    ROUTE_JUNCTIONS:
+      A: J1 -> J2 -> HOSPITAL
+      B: J1 -> J2 -> J3 -> HOSPITAL
+      C: J1 -> J4 -> HOSPITAL
+  J2/J3/J4 are signal-controlled so the Green Corridor preemption logic in
+  sumo_service.py has real traffic lights to override.
+-->
+<nodes>
+    <node id="J1"       x="0"    y="0"    type="priority"/>
+    <node id="J2"       x="2600" y="800"  type="traffic_light"/>
+    <node id="J3"       x="4800" y="1600" type="traffic_light"/>
+    <node id="J4"       x="2600" y="-1600" type="traffic_light"/>
+    <node id="HOSPITAL" x="7500" y="0"    type="priority"/>
+</nodes>

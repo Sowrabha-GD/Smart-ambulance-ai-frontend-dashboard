@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Edge lengths (m) are set explicitly to match backend/config.py ROAD_NETWORK
+  distances (km -> m), even though shared/branching segments make the
+  straight-line node geometry shorter:
+    Road A = e_J1_J2 (2600) + e_J2_HOSPITAL (3800) = 6400m  (config: 6.4km)
+    Road B = e_J1_J2 (2600) + e_J2_J3 (2200) + e_J3_HOSPITAL (2300) = 7100m (config: 7.1km)
+    Road C = e_J1_J4 (2900) + e_J4_HOSPITAL (2900) = 5800m  (config: 5.8km)
+-->
+<edges>
+    <!-- Shared trunk used by both Road A and Road B -->
+    <edge id="e_J1_J2" from="J1" to="J2" numLanes="2" speed="15.28" length="2600" priority="5"/>
+
+    <!-- Road A tail -->
+    <edge id="e_J2_HOSPITAL" from="J2" to="HOSPITAL" numLanes="2" speed="15.28" length="3800" priority="5"/>
+
+    <!-- Road B tail (branches off at J2) -->
+    <edge id="e_J2_J3" from="J2" to="J3" numLanes="2" speed="13.89" length="2200" priority="4"/>
+    <edge id="e_J3_HOSPITAL" from="J3" to="HOSPITAL" numLanes="2" speed="13.89" length="2300" priority="4"/>
+
+    <!-- Road C: independent, shorter but narrower/blockage-prone, matches config blockage_penalty -->
+    <edge id="e_J1_J4" from="J1" to="J4" numLanes="1" speed="11.11" length="2900" priority="3"/>
+    <edge id="e_J4_HOSPITAL" from="J4" to="HOSPITAL" numLanes="1" speed="11.11" length="2900" priority="3"/>
+</edges>

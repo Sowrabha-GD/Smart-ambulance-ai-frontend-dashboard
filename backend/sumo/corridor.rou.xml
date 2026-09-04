@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+
+    <vType id="car" vClass="passenger" length="4.5" maxSpeed="16.7" accel="2.2" decel="4.5" sigma="0.5" color="0.6,0.6,0.65"/>
+    <vType id="two_wheeler" vClass="motorcycle" length="2.2" maxSpeed="18.0" accel="3.0" decel="5.0" sigma="0.6" color="0.9,0.7,0.2"/>
+    <vType id="bus" vClass="bus" length="10" maxSpeed="12.0" accel="1.2" decel="3.5" sigma="0.4" color="0.2,0.4,0.9"/>
+    <vType id="truck" vClass="truck" length="9" maxSpeed="11.0" accel="1.0" decel="3.2" sigma="0.4" color="0.5,0.35,0.2"/>
+
+    <!-- Ambulance: distinct type so the frontend can identify + style it,
+         higher accel/decel and jmIgnore flags so it can behave like an
+         emergency vehicle when the Green Corridor is active. -->
+    <vType id="ambulance" vClass="emergency" length="6" maxSpeed="22.0" accel="3.0" decel="6.0"
+           sigma="0" color="1,0,0" guiShape="emergency" jmDriveAfterRedTime="0" jmIgnoreFoeSpeed="20"/>
+
+    <route id="route_A" edges="e_J1_J2 e_J2_HOSPITAL"/>
+    <route id="route_B" edges="e_J1_J2 e_J2_J3 e_J3_HOSPITAL"/>
+    <route id="route_C" edges="e_J1_J4 e_J4_HOSPITAL"/>
+
+    <!-- Background traffic. vehsPerHour is overridden at runtime per-road by
+         sumo_service.py, generated from the app's live TRAFFIC_WEIGHTS/level
+         (LOW/MEDIUM/HIGH/SEVERE) so the simulation reflects whatever the
+         AI Traffic Analysis stage detected. These defaults are a sane
+         starting point if the simulation is launched standalone. -->
+    <flow id="flow_A_car" type="car" route="route_A" begin="0" end="3600" vehsPerHour="220" departSpeed="max"/>
+    <flow id="flow_A_two_wheeler" type="two_wheeler" route="route_A" begin="0" end="3600" vehsPerHour="140" departSpeed="max"/>
+    <flow id="flow_A_bus" type="bus" route="route_A" begin="0" end="3600" vehsPerHour="12" departSpeed="max"/>
+
+    <flow id="flow_B_car" type="car" route="route_B" begin="0" end="3600" vehsPerHour="190" departSpeed="max"/>
+    <flow id="flow_B_two_wheeler" type="two_wheeler" route="route_B" begin="0" end="3600" vehsPerHour="110" departSpeed="max"/>
+    <flow id="flow_B_truck" type="truck" route="route_B" begin="0" end="3600" vehsPerHour="18" departSpeed="max"/>
+
+    <flow id="flow_C_car" type="car" route="route_C" begin="0" end="3600" vehsPerHour="130" departSpeed="max"/>
+    <flow id="flow_C_two_wheeler" type="two_wheeler" route="route_C" begin="0" end="3600" vehsPerHour="90" departSpeed="max"/>
+
+</routes>
