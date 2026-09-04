@@ -5,17 +5,3 @@ python-multipart==0.0.9
 opencv-python-headless==4.10.0.84
 numpy==1.26.4
 Pillow==10.4.0
-
-# Optional — only needed for LIVE_YOLO mode. The app runs fine in DEMO MODE
-# without these installed.
-ultralytics==8.2.103
-
-# Optional — only needed for the SUMO Simulation page. `eclipse-sumo` bundles
-# the actual sumo/sumo-gui/netconvert binaries for Linux/Windows/macOS, so
-# `pip install eclipse-sumo traci sumolib` is enough — no separate SUMO
-# system install required. Without these, /api/sumo/status reports
-# UNAVAILABLE and the SUMO Simulation page shows a clear "not installed"
-# message instead of fabricating simulation data.
-eclipse-sumo==1.27.1
-traci==1.27.1
-sumolib==1.27.1
